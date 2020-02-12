@@ -6,15 +6,16 @@ var keys = require("./keys");
 var axios = require("axios");
 
 //accesses the command line input then pushes it into an array starting at i=3 
-var input = process.argv;
-var inputArray = [];
-for (i = 3; i < input.length; i++) {
-    inputArray.push(input[i])
+var initialInput = process.argv;
+var command = process.argv[2]
+var userInput = "";
+for (i = 3; i < initialInput.length; i++) {
+    userInput = userInput + " " + initialInput[i];
 }
 
 //node liri.js concert-this <artist/band name here>
 function concert() {
-    var artist = inputArray.join(" ").replace(",", "")
+    var artist = userInput
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     console.log(artist)
     axios.get(queryURL).then(function (response) {
@@ -53,7 +54,7 @@ function spotify() {
     //pushes spotify keys to object to be used by node-spotify-api
     var spotify = new Spotify(keys.spotify);
 
-    var song = inputArray.join(" ").replace(",", "")
+    var song = userInput;
     spotify.search({ type: 'track', query: song }).then(function(response) {
         for (var i = 0; i < response.tracks.items.length; i++) {
             console.log("Artist: ", response.tracks.items[i].artists[0].name);
@@ -71,12 +72,10 @@ function spotify() {
 //node liri.js movie-this '<movie name here>'
 function movie() {
 
-var movieName = inputArray.join(" ").replace(",", "")
+var movieName = userInput;
 
 // Then run a request with axios to the OMDB API with the movie specified
 var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-
-"http://www.omdbapi.com/?t=Frozen&y=&plot=short&apikey=trilogy"
 
 axios.get(queryURL).then(function(response) {
     // * Title of the movie.
@@ -123,11 +122,30 @@ console.log(queryURL);
 
 //node liri.js do-what-it-says
 function doWhat() {
+var fs = require("fs");
 
+fs.readFile("random.txt", "utf8", function(error, data) {
+
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+      return console.log(error);
+    }
+  
+    // We will then print the contents of data
+    console.log(data);
+    // Then split it by commas (to make it more readable)
+    var dataArr = data.split(",");
+    command = dataArr[0];
+    
+    userInput = dataArr[1].replace(/"/g, '')
+
+    options();
+  });
 }
 
 //switch/case to run functions from command line input
-switch (process.argv[2]) {
+function options() { 
+    switch (command) {
     case "concert-this":
         concert();
         break;
@@ -140,4 +158,6 @@ switch (process.argv[2]) {
     case "do-what-it-says":
         doWhat();
         break;
-}
+}};
+
+options();

@@ -1,7 +1,6 @@
 require("dotenv").config();
 //accesses spotify keys
 var keys = require("./keys");
-console.log(keys);
 
 //accesses the axios npm
 var axios = require("axios");
@@ -12,7 +11,6 @@ var inputArray = [];
 for (i = 3; i < input.length; i++) {
     inputArray.push(input[i])
 }
-console.log(inputArray);
 
 //node liri.js concert-this <artist/band name here>
 function concert() {
@@ -56,13 +54,18 @@ function spotify() {
     var spotify = new Spotify(keys.spotify);
 
     var song = inputArray.join(" ").replace(",", "")
-    spotify.search({ type: 'track', query: song }, function (err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
+    spotify.search({ type: 'track', query: song }).then(function(response) {
+        for (var i = 0; i < response.tracks.items.length; i++) {
+            console.log("Artist: ", response.tracks.items[i].artists[0].name);
+            console.log("Song Name: ", response.tracks.items[i].name);
+            console.log("URL: ", response.tracks.items[i].preview_url);
+            console.log("Album: ", response.tracks.items[i].album.name);
+            console.log("\n-------------------------------------\n");
         }
-
-        console.log(data);
-    });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
 }
 
 //node liri.js movie-this '<movie name here>'
@@ -79,10 +82,14 @@ function doWhat() {
 switch (process.argv[2]) {
     case "concert-this":
         concert();
+        break;
     case "spotify-this-song":
         spotify();
+        break;
     case "movie-this":
         movie();
+        break;
     case "do-what-it-says":
         doWhat();
+        break;
 }

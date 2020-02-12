@@ -71,6 +71,54 @@ function spotify() {
 //node liri.js movie-this '<movie name here>'
 function movie() {
 
+var movieName = inputArray.join(" ").replace(",", "")
+
+// Then run a request with axios to the OMDB API with the movie specified
+var queryURL = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+
+"http://www.omdbapi.com/?t=Frozen&y=&plot=short&apikey=trilogy"
+
+axios.get(queryURL).then(function(response) {
+    // * Title of the movie.
+    console.log(response.data.Title);
+    // * Year the movie came out.
+    console.log("Release Date: " + response.data.Year);
+    // * IMDB Rating of the movie.
+    console.log("IMDB Rating: " + response.data.imdbRating);
+    // * Rotten Tomatoes Rating of the movie.
+    console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+    // * Country where the movie was produced.
+    console.log("Produced in " + response.data.Country);
+    // * Language of the movie.
+    console.log("Movie language(s): " + response.data.Language);
+    // * Plot of the movie.
+    console.log(response.data.Plot);
+    // * Actors in the movie.
+    console.log("Starring: " + response.data.Actors);
+})
+.catch(function(error){
+    if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log("---------------Data---------------");
+        console.log(error.response.data);
+        console.log("---------------Status---------------");
+        console.log(error.response.status);
+        console.log("---------------Status---------------");
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an object that comes back with details pertaining to the error that occurred.
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+});
+
+// This line is just to help us debug against the actual URL.
+console.log(queryURL);
 }
 
 //node liri.js do-what-it-says

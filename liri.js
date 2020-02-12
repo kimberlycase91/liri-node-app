@@ -1,6 +1,7 @@
 require("dotenv").config();
 //accesses spotify keys
 var keys = require("./keys");
+console.log(keys);
 
 //accesses the axios npm
 var axios = require("axios");

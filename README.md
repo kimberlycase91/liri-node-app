@@ -1,21 +1,21 @@
-#Liri-node-app
+# Liri-node-app
 Liri is a command-line app that takes in user input and outputs relevant information. 
 
-##What does it do?
+## What does it do?
 Liri is able to search for upcoming concerts for a given band, provides information about a given song or movie. 
 
-##How to use the app:
+## How to use the app:
 How to use the app on the command line
 *To search for upcoming concerts input:
 node liri.js <\artist>
 
-*To search for song info input:
+* To search for song info input: 
 node liri.js <\song name>
 
-*To search for movie info input:
+* To search for movie info input:
 node liri.js <\movie title>
 
-##How does it work?
+## How does it work?
 Liri takes in arguments from the command line and interprets a command and a user input to search for. 
 
 When given the 'concert' command, the app uses the axios npm to retrieve data from the bandsintown API and displays the relevant data in the console. 

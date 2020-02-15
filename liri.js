@@ -10,19 +10,21 @@ var initialInput = process.argv;
 var command = process.argv[2]
 var userInput = "";
 for (i = 3; i < initialInput.length; i++) {
-    userInput = userInput + " " + initialInput[i];
+    userInput = userInput += initialInput[i];
 }
 
 //node liri.js concert-this <artist/band name here>
 function concert() {
     var artist = userInput
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-    console.log(artist)
+    console.log(queryURL);
+    console.log(artist);
     axios.get(queryURL).then(function (response) {
         for (i = 0; i < 10; i++) {
             console.log(response.data[i].venue.name);
             console.log(response.data[i].venue.city);
             console.log(response.data[i].datetime);
+            console.log("---------------------")
         }
     })
         .catch(function (error) {

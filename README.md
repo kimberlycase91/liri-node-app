@@ -1,9 +1,27 @@
-# liri-node-app
+#Liri-node-app
+Liri is a command-line app that takes in user input and outputs relevant information. 
 
-Clearly state the problem the app is trying to solve (i.e. what is it doing and why)
-Give a high-level overview of how the app is organized
-Give start-to-finish instructions on how to run the app
-Include screenshots, gifs or videos of the app functioning
-Contain a link to a deployed version of the app
-Clearly list the technologies used in the app
-State your role in the app development
+##What does it do?
+Liri is able to search for upcoming concerts for a given band, provides information about a given song or movie. 
+
+##How to use the app:
+How to use the app on the command line
+*To search for upcoming concerts input:
+node liri.js <\artist>
+
+*To search for song info input:
+node liri.js <\song name>
+
+*To search for movie info input:
+node liri.js <\movie title>
+
+##How does it work?
+Liri takes in arguments from the command line and interprets a command and a user input to search for. 
+
+When given the 'concert' command, the app uses the axios npm to retrieve data from the bandsintown API and displays the relevant data in the console. 
+
+When given the 'song' command, the app uses the spotify-api-npm to retrieve and display song info in the console. 
+
+When given the 'movie' command, the app uses the axios npm to retrieve data from the omdb API and displays the relevant data in the console.
+
+When given the 'do-what-it-says' command, the app can access a local .txt file and run the command and input that is in the .txt file. 

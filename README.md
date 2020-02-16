@@ -29,4 +29,4 @@ When given the 'movie' command, the app uses the axios npm to retrieve data from
 
 When given the 'do-what-it-says' command, the app can access a local .txt file and run the command and input that is in the .txt file. 
 
-[Basic Demo](https://github.com/kimberlycase91/liri-node-app/blob/master/images/demo.mkv?raw=true)
+[Basic Demo](https://github.com/kimberlycase91/liri-node-app/blob/master/images/demo%20video.mkv?raw=true)
